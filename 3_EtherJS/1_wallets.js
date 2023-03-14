@@ -39,8 +39,8 @@
 // be executed, until you tell the process to stop. 
 
 // This line will tell the process to stop.
-process.exit(0);
-console.log('I am sad line...I will not be printed to console :(');
+// process.exit(0);
+// console.log('I am sad line...I will not be printed to console :(');
 
 // a. Move the sad line above and below `process.exit(0);` to check that the
 // process stops where it is intended to. When you are done, comment out both
@@ -113,6 +113,7 @@ exercise = 2;
 // Hint: you can copy .env_sample, modify its content and save it as .env.
  
 // See if it worked.
+console.log("HERE");
 console.log(process.env);
 
 // exit();
@@ -150,10 +151,18 @@ exercise = '3b';
 // Hint2: `process.env` is an object, if you don't know how to access its 
 // field, read here: https://javascript.info/object
 
-
+let variablesToCheck = [
+    "INFURA_KEY", "INFURA_GOERLI", "INFURA_MAINNET",
+    "ALCHEMY_KEY", "ALCHEMY_GOERLI", "ALCHEMY_MAINNET",
+    "METAMASK_1_ADDRESS", "METAMASK_1_PRIVATE_KEY",
+    "METAMASK_2_ADDRESS", "METAMASK_2_PRIVATE_KEY",
+    "ETHERSCAN_KEY"
+];
 // Solution 1. forEach.
 variablesToCheck.forEach(v => {
-    // Your code here!
+    if (!process.env[v]){
+        console.log(`Missing ${v}, fix your .env file`);
+    }
 });
 
 // Solution 2. For-loop.
@@ -173,7 +182,10 @@ const ethers = require("ethers");
 // a. Create a random wallet and print the address, the private key,
 // and the mnenomic phrase.
 // Hint: ethers.Wallet.createRandom();
-
+let wallet = ethers.Wallet.createRandom();
+console.log("Address:", wallet.address);
+console.log("Private Key:", wallet.privateKey);
+console.log("Mnemonic:", wallet.mnemonic.phrase);
 
 // exit();
 
@@ -211,4 +223,4 @@ exercise = 5;
 
 // Your code here!
 
-// exit();
+exit();

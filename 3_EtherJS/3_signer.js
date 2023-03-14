@@ -19,11 +19,20 @@
 // a. Require the `dotenv` and `ethers` packages.
 // Hint: As you did in file 1_wallet and 2_provider.
 
+require('dotenv').config();
+const ethers = require("ethers");
+
 // Your code here!
 
 // b. Create a Goerli provider.
 
-// Your code here!
+const providerKey =process.env.INFURA_KEY;
+
+const goerliInfuraUrl = `${process.env.INFURA_MAINNET_API_URL}${providerKey}`;
+
+const goerliProvider = new ethers.JsonRpcProvider(goerliInfuraUrl);
+
+
 
 // Exercise 1. Create a Signer.
 ///////////////////////////////
@@ -40,12 +49,14 @@
 // Hint2: if you get an error here, check that the private key begins with "0x".
 
 // Your code here!
+let signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY);
+console.log(signer.address);
 
 // Exercise 2. Sign something.
 //////////////////////////////
 
 const sign = async (message = 'Hello world') => {
-    
+    let signature = await signer.signMessage(message);
     // Your code here!
 };
 
